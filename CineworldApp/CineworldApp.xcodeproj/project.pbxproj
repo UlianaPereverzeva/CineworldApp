@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85670C6A29914172003DA754 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C6929914172003DA754 /* MainPageViewController.swift */; };
+		85670C6D299160AD003DA754 /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C6C299160AD003DA754 /* SearchPageViewController.swift */; };
+		85670C6F29916B76003DA754 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C6E29916B76003DA754 /* MainPageViewController.swift */; };
+		85670C7129916ECF003DA754 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7029916ECF003DA754 /* TabBar.swift */; };
+		85670C7429918774003DA754 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7329918774003DA754 /* MyAccountViewController.swift */; };
+		85670C7729918819003DA754 /* MyFilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7629918819003DA754 /* MyFilmsViewController.swift */; };
 		85713857299022A10022F44C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85713856299022A10022F44C /* AppDelegate.swift */; };
 		85713859299022A10022F44C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85713858299022A10022F44C /* SceneDelegate.swift */; };
 		85713860299022A20022F44C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8571385F299022A20022F44C /* Assets.xcassets */; };
@@ -16,7 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		85670C6929914172003DA754 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		85670C6C299160AD003DA754 /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
+		85670C6E29916B76003DA754 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		85670C7029916ECF003DA754 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		85670C7329918774003DA754 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		85670C7629918819003DA754 /* MyFilmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFilmsViewController.swift; sourceTree = "<group>"; };
 		85713853299022A10022F44C /* CineworldApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CineworldApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85713856299022A10022F44C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85713858299022A10022F44C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,9 +48,33 @@
 		85670C682991414C003DA754 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				85670C6929914172003DA754 /* MainPageViewController.swift */,
+				85670C6E29916B76003DA754 /* MainPageViewController.swift */,
 			);
 			path = MainPage;
+			sourceTree = "<group>";
+		};
+		85670C6B29916088003DA754 /* SearchPage */ = {
+			isa = PBXGroup;
+			children = (
+				85670C6C299160AD003DA754 /* SearchPageViewController.swift */,
+			);
+			path = SearchPage;
+			sourceTree = "<group>";
+		};
+		85670C7229918716003DA754 /* MyAcountPage */ = {
+			isa = PBXGroup;
+			children = (
+				85670C7329918774003DA754 /* MyAccountViewController.swift */,
+			);
+			path = MyAcountPage;
+			sourceTree = "<group>";
+		};
+		85670C75299187D9003DA754 /* SaveFilmsPage */ = {
+			isa = PBXGroup;
+			children = (
+				85670C7629918819003DA754 /* MyFilmsViewController.swift */,
+			);
+			path = SaveFilmsPage;
 			sourceTree = "<group>";
 		};
 		8571384A299022A10022F44C = {
@@ -64,6 +96,10 @@
 		85713855299022A10022F44C /* CineworldApp */ = {
 			isa = PBXGroup;
 			children = (
+				85670C7029916ECF003DA754 /* TabBar.swift */,
+				85670C75299187D9003DA754 /* SaveFilmsPage */,
+				85670C7229918716003DA754 /* MyAcountPage */,
+				85670C6B29916088003DA754 /* SearchPage */,
 				85670C682991414C003DA754 /* MainPage */,
 				8571386B299030E70022F44C /* FirstAnimation */,
 				8571386A299030990022F44C /* Delegates */,
@@ -161,9 +197,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85670C6A29914172003DA754 /* MainPageViewController.swift in Sources */,
+				85670C6D299160AD003DA754 /* SearchPageViewController.swift in Sources */,
 				85713857299022A10022F44C /* AppDelegate.swift in Sources */,
 				85713859299022A10022F44C /* SceneDelegate.swift in Sources */,
+				85670C7429918774003DA754 /* MyAccountViewController.swift in Sources */,
+				85670C7129916ECF003DA754 /* TabBar.swift in Sources */,
+				85670C6F29916B76003DA754 /* MainPageViewController.swift in Sources */,
+				85670C7729918819003DA754 /* MyFilmsViewController.swift in Sources */,
 				8571386D299031370022F44C /* FirstAnimationScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
