@@ -76,7 +76,7 @@ class FirstAnimationScreenViewController: UIViewController {
             self.blackCircle.frame.origin.x += 146
         } completion: { _ in
             DispatchQueue.main.async {
-                let secondViewController = TabBar()
+                let secondViewController = SignUpViewController()
                 self.show(secondViewController, sender: nil)
             }
         }
