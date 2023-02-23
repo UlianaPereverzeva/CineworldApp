@@ -7,7 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85670C6A29914172003DA754 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C6929914172003DA754 /* MainPageViewController.swift */; };
+		85670C6D299160AD003DA754 /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C6C299160AD003DA754 /* SearchPageViewController.swift */; };
+		85670C6F29916B76003DA754 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C6E29916B76003DA754 /* MainPageViewController.swift */; };
+		85670C7129916ECF003DA754 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7029916ECF003DA754 /* TabBar.swift */; };
+		85670C7429918774003DA754 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7329918774003DA754 /* MyAccountViewController.swift */; };
+		85670C7729918819003DA754 /* MyFilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7629918819003DA754 /* MyFilmsViewController.swift */; };
+		85670CC1299E4B86003DA754 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670CC0299E4B86003DA754 /* SignUpViewController.swift */; };
+		85670CC4299F8CBA003DA754 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 85670CC3299F8CBA003DA754 /* IQKeyboardManagerSwift */; };
+		85670CC8299FA612003DA754 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670CC7299FA612003DA754 /* UserModel.swift */; };
+		85670CCA29A0FDA7003DA754 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670CC929A0FDA7003DA754 /* SignInViewController.swift */; };
+		85670CDE29A16291003DA754 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 85670CDD29A16291003DA754 /* FirebaseAnalytics */; };
+		85670CE029A16291003DA754 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 85670CDF29A16291003DA754 /* FirebaseAuth */; };
+		85670CE229A16291003DA754 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 85670CE129A16291003DA754 /* FirebaseCrashlytics */; };
+		85670CE429A16291003DA754 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 85670CE329A16291003DA754 /* FirebaseDatabase */; };
+		85670CE629A16291003DA754 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 85670CE529A16291003DA754 /* FirebaseStorage */; };
+		85670D0829A400FD003DA754 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85670D0729A400FC003DA754 /* GoogleService-Info.plist */; };
 		85713857299022A10022F44C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85713856299022A10022F44C /* AppDelegate.swift */; };
 		85713859299022A10022F44C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85713858299022A10022F44C /* SceneDelegate.swift */; };
 		85713860299022A20022F44C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8571385F299022A20022F44C /* Assets.xcassets */; };
@@ -16,7 +30,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		85670C6929914172003DA754 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		85670C6C299160AD003DA754 /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
+		85670C6E29916B76003DA754 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		85670C7029916ECF003DA754 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		85670C7329918774003DA754 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
+		85670C7629918819003DA754 /* MyFilmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFilmsViewController.swift; sourceTree = "<group>"; };
+		85670CC0299E4B86003DA754 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		85670CC7299FA612003DA754 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		85670CC929A0FDA7003DA754 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		85670D0729A400FC003DA754 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		85713853299022A10022F44C /* CineworldApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CineworldApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85713856299022A10022F44C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85713858299022A10022F44C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +53,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85670CE429A16291003DA754 /* FirebaseDatabase in Frameworks */,
+				85670CDE29A16291003DA754 /* FirebaseAnalytics in Frameworks */,
+				85670CE229A16291003DA754 /* FirebaseCrashlytics in Frameworks */,
+				85670CE029A16291003DA754 /* FirebaseAuth in Frameworks */,
+				85670CC4299F8CBA003DA754 /* IQKeyboardManagerSwift in Frameworks */,
+				85670CE629A16291003DA754 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,9 +68,50 @@
 		85670C682991414C003DA754 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				85670C6929914172003DA754 /* MainPageViewController.swift */,
+				85670C6E29916B76003DA754 /* MainPageViewController.swift */,
 			);
 			path = MainPage;
+			sourceTree = "<group>";
+		};
+		85670C6B29916088003DA754 /* SearchPage */ = {
+			isa = PBXGroup;
+			children = (
+				85670C6C299160AD003DA754 /* SearchPageViewController.swift */,
+			);
+			path = SearchPage;
+			sourceTree = "<group>";
+		};
+		85670C7229918716003DA754 /* MyAcountPage */ = {
+			isa = PBXGroup;
+			children = (
+				85670C7329918774003DA754 /* MyAccountViewController.swift */,
+			);
+			path = MyAcountPage;
+			sourceTree = "<group>";
+		};
+		85670C75299187D9003DA754 /* SaveFilmsPage */ = {
+			isa = PBXGroup;
+			children = (
+				85670C7629918819003DA754 /* MyFilmsViewController.swift */,
+			);
+			path = SaveFilmsPage;
+			sourceTree = "<group>";
+		};
+		85670CC5299FA5A7003DA754 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				85670CC7299FA612003DA754 /* UserModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		85670CC6299FA5B9003DA754 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				85670CC0299E4B86003DA754 /* SignUpViewController.swift */,
+				85670CC929A0FDA7003DA754 /* SignInViewController.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		8571384A299022A10022F44C = {
@@ -64,10 +133,17 @@
 		85713855299022A10022F44C /* CineworldApp */ = {
 			isa = PBXGroup;
 			children = (
+				85670C7029916ECF003DA754 /* TabBar.swift */,
+				85670CC6299FA5B9003DA754 /* SignUp */,
+				85670CC5299FA5A7003DA754 /* Models */,
+				85670C75299187D9003DA754 /* SaveFilmsPage */,
+				85670C7229918716003DA754 /* MyAcountPage */,
+				85670C6B29916088003DA754 /* SearchPage */,
 				85670C682991414C003DA754 /* MainPage */,
 				8571386B299030E70022F44C /* FirstAnimation */,
 				8571386A299030990022F44C /* Delegates */,
 				8571385F299022A20022F44C /* Assets.xcassets */,
+				85670D0729A400FC003DA754 /* GoogleService-Info.plist */,
 				85713861299022A20022F44C /* LaunchScreen.storyboard */,
 				85713864299022A20022F44C /* Info.plist */,
 			);
@@ -107,6 +183,14 @@
 			dependencies = (
 			);
 			name = CineworldApp;
+			packageProductDependencies = (
+				85670CC3299F8CBA003DA754 /* IQKeyboardManagerSwift */,
+				85670CDD29A16291003DA754 /* FirebaseAnalytics */,
+				85670CDF29A16291003DA754 /* FirebaseAuth */,
+				85670CE129A16291003DA754 /* FirebaseCrashlytics */,
+				85670CE329A16291003DA754 /* FirebaseDatabase */,
+				85670CE529A16291003DA754 /* FirebaseStorage */,
+			);
 			productName = CineworldApp;
 			productReference = 85713853299022A10022F44C /* CineworldApp.app */;
 			productType = "com.apple.product-type.application";
@@ -135,6 +219,10 @@
 				Base,
 			);
 			mainGroup = 8571384A299022A10022F44C;
+			packageReferences = (
+				85670CC2299F8CBA003DA754 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				85670CDC29A16291003DA754 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 85713854299022A10022F44C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -151,6 +239,7 @@
 			files = (
 				85713863299022A20022F44C /* LaunchScreen.storyboard in Resources */,
 				85713860299022A20022F44C /* Assets.xcassets in Resources */,
+				85670D0829A400FD003DA754 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,9 +250,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85670C6A29914172003DA754 /* MainPageViewController.swift in Sources */,
+				85670CCA29A0FDA7003DA754 /* SignInViewController.swift in Sources */,
+				85670C6D299160AD003DA754 /* SearchPageViewController.swift in Sources */,
 				85713857299022A10022F44C /* AppDelegate.swift in Sources */,
 				85713859299022A10022F44C /* SceneDelegate.swift in Sources */,
+				85670C7429918774003DA754 /* MyAccountViewController.swift in Sources */,
+				85670C7129916ECF003DA754 /* TabBar.swift in Sources */,
+				85670C6F29916B76003DA754 /* MainPageViewController.swift in Sources */,
+				85670CC1299E4B86003DA754 /* SignUpViewController.swift in Sources */,
+				85670C7729918819003DA754 /* MyFilmsViewController.swift in Sources */,
+				85670CC8299FA612003DA754 /* UserModel.swift in Sources */,
 				8571386D299031370022F44C /* FirstAnimationScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,7 +418,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -352,7 +448,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -378,6 +474,58 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		85670CC2299F8CBA003DA754 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.0;
+			};
+		};
+		85670CDC29A16291003DA754 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		85670CC3299F8CBA003DA754 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85670CC2299F8CBA003DA754 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		85670CDD29A16291003DA754 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85670CDC29A16291003DA754 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		85670CDF29A16291003DA754 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85670CDC29A16291003DA754 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		85670CE129A16291003DA754 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85670CDC29A16291003DA754 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		85670CE329A16291003DA754 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85670CDC29A16291003DA754 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		85670CE529A16291003DA754 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85670CDC29A16291003DA754 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8571384B299022A10022F44C /* Project object */;
 }
