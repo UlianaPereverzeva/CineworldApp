@@ -20,6 +20,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     var backgroundImage = UIImageView()
     var emailErrorLabel = UILabel()
     var passwordErrorLabel = UILabel()
+    var activityIndicator: UIActivityIndicatorView!
+    
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         cornerRadiusTextFields()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        emailTextField.text = ""
+        passwordTextField.text = ""
     }
     
     private func cornerRadiusTextFields() {
@@ -115,6 +125,17 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         passwordErrorLabel.isHidden = true
         self.view.addSubview(passwordErrorLabel)
         
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.center = self.backgroundImage.center
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(activityIndicator!)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ])
+        
         let signIn = UIButton(type: .system)
         signIn.setTitle("Sign in", for: .normal)
         signIn.addTarget(self, action: #selector(signInAction(_:)), for: .touchUpInside)
@@ -156,6 +177,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         stackView.addArrangedSubview(emailErrorLabel)
         stackView.addArrangedSubview(passwordTextField)
         stackView.addArrangedSubview(passwordErrorLabel)
+        stackView.addArrangedSubview(activityIndicator)
         stackView.addArrangedSubview(signInButton)
         stackView.addArrangedSubview(buttonAccount)
         
@@ -170,7 +192,34 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func signInAction(_ sender:UIButton!) {
+        createUser()
+    }
+    
+    private func displayWarningLabel(withTextForEmail textEmail: String?, withTextForPassword textPassword: String?) {
+        if let text = textEmail {
+            emailErrorLabel.text = text
+            emailErrorLabel.isHidden = false
+        } else {
+            emailErrorLabel.isHidden = true
+        }
         
+        if let text = textPassword {
+            passwordErrorLabel.text = text
+            passwordErrorLabel.isHidden = false
+        } else {
+            passwordErrorLabel.isHidden = true
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if emailTextField.hasText && passwordTextField.hasText {
+            createUser()
+        }
+        return true
+    }
+    
+    func createUser() {
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
               email != "",
@@ -179,18 +228,43 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                                 withTextForPassword: "Incorrect password")
             return
         }
+        activityIndicator?.isHidden = false
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
-            if let error {
-                self?.displayWarningLabel(withTextForEmail: "Invalid email: \(error.localizedDescription)", withTextForPassword: "Incorrect password \(error.localizedDescription)")
-            } else if let _ = user {
-                let vc = MainPageViewController()
-                self?.navigationController?.pushViewController(vc, animated: true)
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] user, error in
+            self?.activityIndicator?.isHidden = true
+
+            if let error = error {
+                
+                if let errCode = AuthErrorCode.Code(rawValue: error._code) {
+
+                    switch errCode {
+                    case .invalidEmail:
+                        self?.displayWarningLabel(withTextForEmail: "Invalid email \(error.localizedDescription)",
+                                                  withTextForPassword: nil)
+                    case .emailAlreadyInUse:
+                        self?.displayWarningLabel(withTextForEmail: "Invalid email \(error.localizedDescription)",
+                                                  withTextForPassword: nil)
+                    case .wrongPassword:
+                        self?.displayWarningLabel(withTextForEmail: nil,
+                                                  withTextForPassword: "Incorrect password")
+                    default:
+                        print("Create User Error: \(error)")
+                    }
+                }
+                
             } else {
-                self?.displayWarningLabel(withTextForEmail: "No such user",
-                                          withTextForPassword: "No such user")
+                guard let user = user else {
+                    return
+                }
+                
+                let userRef = self?.ref.child(user.user.uid)
+                userRef?.setValue(["email": user.user.email])
+            
+                let vc = TabBar()
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
         }
+
     }
     
     @objc func donotHaveAnAccountAction(_ sender:UIButton!) {
@@ -198,14 +272,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func displayWarningLabel(withTextForEmail textEmail: String,
-                                     withTextForPassword textPassword: String ) {
-        
-        emailErrorLabel.text = textEmail
-        passwordErrorLabel.text = textPassword
-        emailErrorLabel.isHidden = false
-        passwordErrorLabel.isHidden = false
-    }
+    
 }
 
 

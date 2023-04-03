@@ -44,6 +44,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         cornerRadiusTextFields()
     }
     
+    //при переходе назад
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -55,7 +56,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         emailTextField.layer.cornerRadius = emailTextField.frame.height/2
         passwordTextField.layer.cornerRadius = passwordTextField.frame.height/2
         createAccountButton.layer.cornerRadius = createAccountButton.frame.height/2
-        
     }
     
     private func setUpUI() {
@@ -208,6 +208,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // тут начинается логика
+    
     private func displayWarningLabel(withTextForEmail textEmail: String?, withTextForPassword textPassword: String?) {
         if let text = textEmail {
             emailErrorLabel.text = text
@@ -272,9 +283,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 
                 let userRef = self?.ref.child(user.user.uid)
                 userRef?.setValue(["email": user.user.email])
-                
-//                let vc = MainPageViewController()
-//                self?.navigationController?.pushViewController(vc, animated: true)
+            
+                let vc = TabBar()
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
         }
 
