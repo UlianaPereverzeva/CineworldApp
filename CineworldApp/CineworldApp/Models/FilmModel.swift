@@ -103,6 +103,11 @@ struct FilmModel : Decodable {
     
 }
 
+struct Genres : Codable {
+    
+    let genres : [Genre]
+}
+
 struct Genre : Codable {
     let genre : String?
     let id : Int?
@@ -121,9 +126,3 @@ struct Countries : Codable {
     }
 }
 
-struct Genres : Codable {
-    
-    let genres : [Genre]
-    
-
-}

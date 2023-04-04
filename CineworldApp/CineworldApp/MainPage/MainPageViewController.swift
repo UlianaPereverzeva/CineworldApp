@@ -7,9 +7,13 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
+
 
 class MainPageViewController: UIViewController {
-
+    
+    var realmService = RealmService()
+    var favoriteslist : Favoriteslist?
     var mainImageOfFilm = UIImageView()
     var blackGradient = UIImageView()
     var nameOfFilm = UILabel()
@@ -22,8 +26,11 @@ class MainPageViewController: UIViewController {
     var FilmDescription = UILabel()
     let scrollView = UIScrollView()
     let contentView = UIView()
+    
     var watchFilmButton: UIButton!
     var saveFilmButton: UIButton!
+    var favoritesButton: UIButton!
+
     var FirstCollectionView: UICollectionView!
     var SecondCollectionView: UICollectionView!
     var ThirdCollectionView: UICollectionView!
@@ -41,18 +48,21 @@ class MainPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupScrollView()
         setUpUI()
+        
         setUpFirstCollectionView()
         setUpSecondCollectionView()
         setUpThirdCollectionView()
+        
         getGenres()
         getPostersAndStill()
         getDataAboutFilm()
-        getLogoOfFilm()
-        getRatingOfFilm()
+//        getLogoOfFilm()
+//        getRatingOfFilm()
         
-        navigationController?.isNavigationBarHidden = true
+        //navigationController?.isNavigationBarHidden = true
         scrollView.contentInsetAdjustmentBehavior = .never
         view.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
 }
@@ -60,7 +70,9 @@ class MainPageViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         watchFilmButton.layer.cornerRadius = watchFilmButton.frame.height/2
-        saveFilmButton.layer.cornerRadius = watchFilmButton.frame.height/2
+        //saveFilmButton.layer.cornerRadius = watchFilmButton.frame.height/2
+        favoritesButton.layer.cornerRadius = watchFilmButton.frame.height/2
+
     }
     
     func setupScrollView(){
@@ -93,7 +105,7 @@ class MainPageViewController: UIViewController {
 
         FirstCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         FirstCollectionView.dataSource = self
-        //collectionView.delegate = self
+        FirstCollectionView.delegate = self
         FirstCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "filmCell")
         FirstCollectionView.showsVerticalScrollIndicator = false
         FirstCollectionView.backgroundColor = .clear
@@ -114,7 +126,7 @@ class MainPageViewController: UIViewController {
 
         SecondCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         SecondCollectionView.dataSource = self
-        //collectionView.delegate = self
+        SecondCollectionView.delegate = self
         SecondCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "filmCell")
         SecondCollectionView.showsVerticalScrollIndicator = false
         SecondCollectionView.backgroundColor = .clear
@@ -136,7 +148,7 @@ class MainPageViewController: UIViewController {
 
         ThirdCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         ThirdCollectionView.dataSource = self
-        //collectionView.delegate = self
+        ThirdCollectionView.delegate = self
         ThirdCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "filmCell")
         ThirdCollectionView.showsVerticalScrollIndicator = false
         ThirdCollectionView.backgroundColor = .clear
@@ -244,21 +256,36 @@ class MainPageViewController: UIViewController {
         self.watchFilmButton.translatesAutoresizingMaskIntoConstraints = false
         watchFilmButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
-        let saveButton = UIButton(type: .system)
+//        let saveButton = UIButton(type: .system)
+//
+//        let origImage = UIImage(named: "download")
+//        let image = origImage?.withRenderingMode(.alwaysTemplate)
+//        saveButton.setImage(image, for: .normal)
+//        saveButton.tintColor = .white
+//
+//        saveButton.addTarget(self, action: #selector(watchButtonAction(_:)), for: .touchUpInside)
+//        saveButton.setTitleColor(UIColor.white, for: .normal)
+//        saveButton.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1.00)
+//        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+//        self.saveFilmButton = saveButton
+//        self.saveFilmButton.translatesAutoresizingMaskIntoConstraints = false
+//        saveFilmButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        saveFilmButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
-        let origImage = UIImage(named: "download")
-        let image = origImage?.withRenderingMode(.alwaysTemplate)
-        saveButton.setImage(image, for: .normal)
-        saveButton.tintColor = .white
+        let addToFavorites = UIButton(type: .system)
         
-        saveButton.addTarget(self, action: #selector(watchButtonAction(_:)), for: .touchUpInside)
-        saveButton.setTitleColor(UIColor.white, for: .normal)
-        saveButton.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1.00)
-        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        self.saveFilmButton = saveButton
-        self.saveFilmButton.translatesAutoresizingMaskIntoConstraints = false
-        saveFilmButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        saveFilmButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        let favoritesImage = UIImage(named: "hert")
+        let favoriteImage = favoritesImage?.withRenderingMode(.alwaysTemplate)
+        addToFavorites.setImage(favoriteImage, for: .normal)
+        addToFavorites.tintColor = UIColor(red: 0.76, green: 0.89, blue: 0.23, alpha: 1.00)
+        //addToFavorites.imageView?.contentMode = .scaleAspectFit
+        addToFavorites.addTarget(self, action: #selector(isFavoriteButtonTapped(_:)), for: .touchUpInside)
+        addToFavorites.backgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1.00)
+        
+        self.favoritesButton = addToFavorites
+        self.favoritesButton.translatesAutoresizingMaskIntoConstraints = false
+        favoritesButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        favoritesButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         let buttonStackView = UIStackView()
         buttonStackView.axis = NSLayoutConstraint.Axis.horizontal
@@ -267,7 +294,8 @@ class MainPageViewController: UIViewController {
         buttonStackView.spacing = 14.0
         
         buttonStackView.addArrangedSubview(watchFilmButton)
-        buttonStackView.addArrangedSubview(saveFilmButton)
+       // buttonStackView.addArrangedSubview(saveFilmButton)
+        buttonStackView.addArrangedSubview(favoritesButton)
         
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -336,6 +364,30 @@ class MainPageViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func isFavoriteButtonTapped(_ sender:UIButton!) {
+        let vc = FavoritesFilmsViewController()
+//        guard let filmID = filmID else { return }
+        //vc.filmID.append(filmID)
+        guard let name = nameOfFilm.text else { return }
+        //vc.arrayOfNames.append(name)
+         
+
+        if favoriteslist == nil {
+            favoriteslist = Favoriteslist()
+        }
+        favoriteslist?.name = name
+        
+        guard let image = mainImageOfFilm.image else { return }
+        let data = NSData(data: image.jpegData(compressionQuality: 0.9)!)
+        favoriteslist?.poster = data
+        guard let favoriteslist = favoriteslist else { return }
+        try? realmService.localRealm.write {
+            realmService.localRealm.add(favoriteslist, update: .all)
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+    
     private func getPostersAndStill() {
         let poster = "POSTER"
         guard let filmID = filmID else { return }
@@ -350,39 +402,44 @@ class MainPageViewController: UIViewController {
         guard let filmID = filmID else { return }
         NetworkService.fetchDataAboutFilm(filmID: filmID) { filmModel, error in
             guard let filmModel = filmModel,
+                  let name = filmModel.nameRu,
                   let year = filmModel.year,
                   let genres = filmModel.genres[0].genre,
                   let countries = filmModel.countries[0].country,
                   let filmLength = filmModel.filmLength,
                   let ratingAgeLimits = filmModel.ratingAgeLimits,
                   let shortDescription = filmModel.shortDescription,
-                  let description = filmModel.description else { return }
-            
+                  let description = filmModel.description,
+                  let rating = filmModel.ratingKinopoisk,
+                  let urlString = filmModel.logoUrl,
+                  let url = URL(string: urlString) else { return }
+            self.logoOfFilm.kf.setImage(with: url)
+            self.numberOfFilmRating.text = rating.description
             self.parametrsAboutFilm.text = "\(year), \(genres), \(countries),\n\(filmLength) мин, \(ratingAgeLimits)+"
             self.shortFilmDescription.text = shortDescription
             self.FilmDescription.text = description
-
+            self.nameOfFilm.text = name
         }
     }
     
-    private func getLogoOfFilm() {
-        guard let filmID = filmID else { return }
-        NetworkService.fetchLogoOfFilm(filmID: filmID) { filmModel, error in
-            guard let filmModel = filmModel,
-                  let urlString = filmModel.logoUrl,
-            let url = URL(string: urlString) else { return }
-            self.logoOfFilm.kf.setImage(with: url)
-        }
-    }
+//    private func getLogoOfFilm() {
+//        guard let filmID = filmID else { return }
+//        NetworkService.fetchLogoOfFilm(filmID: filmID) { filmModel, error in
+//            guard let filmModel = filmModel,
+//                  let urlString = filmModel.logoUrl,
+//            let url = URL(string: urlString) else { return }
+//            self.logoOfFilm.kf.setImage(with: url)
+//        }
+//    }
     
-    private func getRatingOfFilm() {
-        guard let filmID = filmID else { return }
-        NetworkService.fetchRatingOfFilm(filmID: filmID) { filmModel, error in
-            guard let filmModel = filmModel,
-                  let rating = filmModel.ratingKinopoisk else { return }
-            self.numberOfFilmRating.text = rating.description
-        }
-    }
+//    private func getRatingOfFilm() {
+//        guard let filmID = filmID else { return }
+//        NetworkService.fetchRatingOfFilm(filmID: filmID) { filmModel, error in
+//            guard let filmModel = filmModel,
+//                  let rating = filmModel.ratingKinopoisk else { return }
+//            self.numberOfFilmRating.text = rating.description
+//        }
+//    }
     
     private func getPosterByGenres() {
         
@@ -390,25 +447,25 @@ class MainPageViewController: UIViewController {
               let genresID1 = self.genres[1].id,
               let genresID2 = self.genres[2].id else { return }
 
-        NetworkService.fetchPosterByIdOfGenres(genresID: genresID0) { premier, error in
-            guard let premier = premier,
-                  let array = premier.items else {return}
+        NetworkService.fetchPosterByIdOfGenres(genresID: genresID0) { films, error in
+            guard let films = films,
+                  let array = films.items else {return}
             self.arrayOfGenresWith0ID = array
             self.nameOfSection0.text = self.genres[0].genre?.description
             self.FirstCollectionView.reloadData()
         }
         
-        NetworkService.fetchPosterByIdOfGenres(genresID: genresID1) { premier, error in
-            guard let premier = premier,
-                  let array = premier.items else {return}
+        NetworkService.fetchPosterByIdOfGenres(genresID: genresID1) { films, error in
+            guard let films = films,
+                  let array = films.items else {return}
             self.arrayOfGenresWith1ID = array
             self.nameOfSection1.text = self.genres[1].genre?.description
             self.SecondCollectionView.reloadData()
         }
         
-        NetworkService.fetchPosterByIdOfGenres(genresID: genresID2) { premier, error in
-            guard let premier = premier,
-                  let array = premier.items else {return}
+        NetworkService.fetchPosterByIdOfGenres(genresID: genresID2) { films, error in
+            guard let films = films,
+                  let array = films.items else {return}
             self.arrayOfGenresWith2ID = array
             self.nameOfSection2.text = self.genres[2].genre?.description
             self.ThirdCollectionView.reloadData()
@@ -425,7 +482,7 @@ class MainPageViewController: UIViewController {
     }
 }
 
-extension MainPageViewController: UICollectionViewDataSource {
+extension MainPageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -437,34 +494,125 @@ extension MainPageViewController: UICollectionViewDataSource {
             return arrayOfGenresWith2ID.count
 
         }
-//            if collectionView == FirstCollectionView {
-//                return arrayOfGenresWith0ID.count
-//            } else if collectionView == SecondCollectionView {
-//                return arrayOfGenresWith1ID.count
-//            } else if collectionView == ThirdCollectionView {
-//                return arrayOfGenresWith2ID.count
-//            }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filmCell", for: indexPath) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
+        if collectionView == FirstCollectionView {
+            let item = arrayOfGenresWith0ID[indexPath.item]
+            cell.setUpCell(item: item )
+        } else if collectionView == SecondCollectionView {
+            let item1 = arrayOfGenresWith1ID[indexPath.item]
+            cell.setUpCell(item: item1 )
+        } else if collectionView == ThirdCollectionView {
+            let item2 = arrayOfGenresWith2ID[indexPath.item]
+            cell.setUpCell(item: item2 )
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-            if collectionView == FirstCollectionView {
-                let item = arrayOfGenresWith0ID[indexPath.item]
-                cell.setUpCell(item: item )
-            } else if collectionView == SecondCollectionView {
-                let item1 = arrayOfGenresWith1ID[indexPath.item]
-                cell.setUpCell(item: item1 )
-            } else if collectionView == ThirdCollectionView {
-                let item2 = arrayOfGenresWith2ID[indexPath.item]
-                cell.setUpCell(item: item2 )
-            }
+        let vc = FilmViewController()
+        
+        if indexPath.section == 0 {
+            let firstCollectionArray = arrayOfGenresWith0ID[indexPath.item]
+            guard let id = firstCollectionArray.kinopoiskId else { return }
+            getData(id:id , vc: vc)
+            getStills(id:id , vc: vc)
+            getActors(id:id , vc: vc)
+            getVideo(id:id , vc: vc)
+            guard let urlString = firstCollectionArray.posterUrl,
+                  let url = URL(string: urlString) else { return }
+            vc.mainImageOfFilm.kf.setImage(with: url)
             
-        //let item = arrayOfGenresWith0ID[indexPath.item]
-       // cell.setUpCell(item: item )
-                return cell
+        } else if indexPath.section == 1 {
+            let secondCollectionArray = arrayOfGenresWith1ID[indexPath.item]
+            guard let id = secondCollectionArray.kinopoiskId else { return }
+            getData(id:id , vc: vc)
+            getStills(id:id , vc: vc)
+            getActors(id:id , vc: vc)
+
+            getVideo(id:id , vc: vc)
+           
+            guard let urlString = secondCollectionArray.posterUrl,
+                  let url = URL(string: urlString) else { return }
+            vc.mainImageOfFilm.kf.setImage(with: url)
+        } else {
+            let thirdCollectionArray = arrayOfGenresWith2ID[indexPath.item]
+            guard let id = thirdCollectionArray.kinopoiskId else { return }
+            getData(id:id , vc: vc)
+            getStills(id:id , vc: vc)
+            getActors(id:id , vc: vc)
+
+            getVideo(id:id , vc: vc)
+            guard let urlString = thirdCollectionArray.posterUrl,
+                  let url = URL(string: urlString) else { return }
+            vc.mainImageOfFilm.kf.setImage(with: url)
+        }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func getData(id: Int, vc: FilmViewController) {
+        //let vc = FilmViewController()
+        NetworkService.fetchLogoOfFilm(filmID: id) { filmModel, error in
+            guard let filmModel = filmModel,
+                  let description = filmModel.description,
+                  let rating = filmModel.ratingKinopoisk,
+                  let year = filmModel.year,
+                  let genres = filmModel.genres[0].genre,
+                  let countries = filmModel.countries[0].country,
+                  let filmLength = filmModel.filmLength,
+                  let ratingAgeLimits = filmModel.ratingAgeLimits,
+                  let urlString = filmModel.logoUrl,
+            let url = URL(string: urlString) else { return }
+            vc.logoOfFilm.kf.setImage(with: url)
+            vc.filmDescription.text = description
+            vc.parametrsAboutFilm.text = "\(year), \(genres), \(countries),\n\(filmLength) мин, \(ratingAgeLimits)+"
+            vc.numberOfFilmRating.text = rating.description
+        }
+    }
+    
+    func getVideo(id: Int, vc: FilmViewController) {
+        //let vc = FilmViewController()
+        
+        NetworkService.fetchVideo(filmID: id) { videoModel, error in
+            guard let videoModel = videoModel,
+                  let arrayOfVideos = videoModel.items else { return }
+            for i in arrayOfVideos {
+                guard let video = i.url else { return }
+                vc.arrayOfVideoURL.append(video)
+            }
+        }
+    }
+    
+    func getStills(id: Int, vc: FilmViewController){
+        //let vc = FilmViewController()
+
+        let still = "STILL"
+        NetworkService.fetchPosters(type: still, filmID: id) { still, error in
+            guard let still = still else { return }
+            let items = still.items
+            vc.arrayOfItems = items
+            vc.videoCollectionView.reloadData()
+        }
+    }
+    
+    func getActors(id: Int, vc: FilmViewController){
+        //let vc = FilmViewController()
+
+        NetworkService.fetchActors(filmID: id) { actorModel, error in
+            guard let actorModel = actorModel else { return }
+            vc.arrayOfActors = actorModel
+            vc.actorCollectionView.reloadData()
+        }
     }
 }
+
+    
+
+

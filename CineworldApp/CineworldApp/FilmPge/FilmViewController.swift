@@ -6,13 +6,14 @@
 //
 
 import UIKit
-import AVFoundation
-import AVKit
+
+import WebKit
 
 class FilmViewController: UIViewController {
     
     var mainImageOfFilm = UIImageView()
     var blackGradient = UIImageView()
+    var favorites: UIButton!
     var nameOfFilm = UILabel()
     var logoOfFilm = UIImageView()
     var numberOfFilmRating = UILabel()
@@ -23,30 +24,36 @@ class FilmViewController: UIViewController {
     var trailerLabel = UILabel()
     var actorsLabel = UILabel()
     var arrayActorsOfPosters : String?
-    var arrayOfActors = [Items]()
-
+    var arrayOfActors = [ActorModel]()
+    
     var arrayOfVideoURL = [String]()
     var arrayOfItems = [Item]()
-    var AVPlayerController = AVPlayerViewController()
-    var playerView : AVPlayer?
+    //var AVPlayerController = AVPlayerViewController()
+    //var playerView : AVPlayer?
     
     var videoCollectionView: UICollectionView!
     var actorCollectionView: UICollectionView!
-
+    
     let scrollView = UIScrollView()
     let contentView = UIView()
     var filmID: Int!
+    
+    var items: Items?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
         setUpUI()
         setUpVideoCollectionView()
-        setUpActorsCollectionView()
+       
         getVideos()
+        setUpActorsCollectionView()
         getActors()
         getPostersAndStill()
+//        setUpVideoCollectionView()
+//        getVideos()
         
+        navigationItem.backBarButtonItem?.tintColor = .white
         view.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
         // navigationController?.isNavigationBarHidden = true
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -83,7 +90,7 @@ class FilmViewController: UIViewController {
         videoCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         videoCollectionView.dataSource = self
         videoCollectionView.delegate = self
-        videoCollectionView.register(SubclassedCollectionViewCell.self, forCellWithReuseIdentifier: "videoCell")
+        videoCollectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: "videoCell")
         videoCollectionView.showsVerticalScrollIndicator = false
         videoCollectionView.backgroundColor = .clear
         contentView.addSubview(videoCollectionView)
@@ -99,7 +106,7 @@ class FilmViewController: UIViewController {
     private func setUpActorsCollectionView() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         //layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 100, height: 160)
+        layout.itemSize = CGSize(width: 100, height: 180)
         layout.minimumLineSpacing = 10
         layout.scrollDirection = .horizontal
         
@@ -113,7 +120,7 @@ class FilmViewController: UIViewController {
         actorCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         actorCollectionView.topAnchor.constraint(equalTo: self.actorsLabel.bottomAnchor, constant: 20).isActive = true
-        actorCollectionView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        actorCollectionView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         actorCollectionView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         actorCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 14).isActive = true
         actorCollectionView.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
@@ -202,6 +209,25 @@ class FilmViewController: UIViewController {
         parametrsAboutFilm.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -70).isActive = true
         parametrsAboutFilm.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 70).isActive = true
         
+        let addToFavorites = UIButton(type: .system)
+        
+        let favoritesImage = UIImage(named: "hert")
+        let favoriteImage = favoritesImage?.withRenderingMode(.alwaysTemplate)
+        addToFavorites.setImage(favoriteImage, for: .normal)
+        addToFavorites.tintColor = UIColor(red: 0.76, green: 0.89, blue: 0.23, alpha: 1.00)
+        //addToFavorites.imageView?.contentMode = .scaleAspectFit
+        addToFavorites.addTarget(self, action: #selector(isFavoriteButtonTapped(_:)), for: .touchUpInside)
+        addToFavorites.backgroundColor = .clear
+        
+        self.contentView.addSubview(addToFavorites)
+        self.favorites = addToFavorites
+        self.favorites.translatesAutoresizingMaskIntoConstraints = false
+        favorites.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        //favorites.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        favorites.topAnchor.constraint(equalTo: parametrsAboutFilm.bottomAnchor, constant: 14).isActive = true
+        favorites.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -170).isActive = true
+        favorites.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 170).isActive = true
+
         filmDescription.numberOfLines = 0
         filmDescription.textColor = .white //UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1.00)
         filmDescription.textAlignment = .left
@@ -210,7 +236,7 @@ class FilmViewController: UIViewController {
         
         filmDescription.translatesAutoresizingMaskIntoConstraints = false
         
-        filmDescription.topAnchor.constraint(equalTo: parametrsAboutFilm.bottomAnchor, constant: 14).isActive = true
+        filmDescription.topAnchor.constraint(equalTo: favorites.bottomAnchor, constant: 14).isActive = true
         filmDescription.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20).isActive = true
         filmDescription.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
         
@@ -239,8 +265,15 @@ class FilmViewController: UIViewController {
         actorsLabel.topAnchor.constraint(equalTo: trailerLabel.bottomAnchor, constant: 170).isActive = true
         actorsLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         actorsLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 14).isActive = true
-        
-        
+    }
+    
+    @objc func isFavoriteButtonTapped(_ sender:UIButton!) {
+        let vc = FavoritesFilmsViewController()
+        guard let filmID = filmID else { return }
+        vc.filmID.append(filmID)
+        guard let name = nameOfFilm.text else { return }
+        vc.arrayOfNames.append(name)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func getVideos() {
@@ -258,7 +291,7 @@ class FilmViewController: UIViewController {
     private func getPostersAndStill() {
         let still = "STILL"
         guard let filmID = filmID else { return }
-    
+        
         NetworkService.fetchPosters(type: still, filmID: filmID) { still, error in
             guard let still = still else { return }
             let items = still.items
@@ -270,18 +303,21 @@ class FilmViewController: UIViewController {
     func videoUrl(url: String) {
         
         guard let url = URL(string: url) else { return }
-            self.playerView = AVPlayer (url: url)
-            playerView?.play()
-            AVPlayerController.player = playerView
-            present (AVPlayerController, animated: true, completion: nil)
+        let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(webView)
+        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        webView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        webView.load(URLRequest(url: url))
     }
     
     private func getActors() {
         guard let filmID = filmID else { return }
         NetworkService.fetchActors(filmID: filmID) { actorModel, error in
-            guard let actorModel = actorModel,
-                  let poster = actorModel.items else { return }
-            self.arrayOfActors = poster
+            guard let actorModel = actorModel else { return }
+            self.arrayOfActors = actorModel
             self.actorCollectionView.reloadData()
         }
     }
@@ -300,44 +336,43 @@ extension FilmViewController: UICollectionViewDataSource , UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            guard let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath) as? SubclassedCollectionViewCell else {
-                        return UICollectionViewCell()
+        if collectionView == videoCollectionView  {
+            guard let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath) as? VideoCollectionViewCell else {
+                return UICollectionViewCell()
             }
             //let video = arrayOfVideoURL[indexPath.item]
-                    let still = arrayOfItems[indexPath.item]
-                    videoCell.configureCell(still: still)
-           return videoCell
-         } else {
-             guard let actorCell = collectionView.dequeueReusableCell(withReuseIdentifier: "actorCell", for: indexPath) as? ActorsCollectionViewCell else {
-                         return UICollectionViewCell()
+            let still = arrayOfItems[indexPath.item]
+            videoCell.configureCell(still: still)
+            return videoCell
+        } else   {
+            guard let actorCell = collectionView.dequeueReusableCell(withReuseIdentifier: "actorCell", for: indexPath) as? ActorsCollectionViewCell else {
+                return UICollectionViewCell()
             }
-             let arrayOfActors = arrayOfActors[indexPath.item]
-             actorCell.configureCell(actorModel: arrayOfActors)
-             return actorCell
+            let arrayOfActors = arrayOfActors[indexPath.item]
+            actorCell.configureCell(actorModel: arrayOfActors)
+            return actorCell
         }
     }
-//        guard let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath) as? SubclassedCollectionViewCell else {
-//            return UICollectionViewCell()
-//        }
-//
-//        //let video = arrayOfVideoURL[indexPath.item]
-//        let still = arrayOfItems[indexPath.item]
-//        videoCell.configureCell(still: still)
-//
-//        //return videoCell
-//
-//        guard let actorCell = collectionView.dequeueReusableCell(withReuseIdentifier: "actorCell", for: indexPath) as? ActorsCollectionViewCell else {
-//            return UICollectionViewCell()
-//        }
-//        let arrayOfActors = arrayOfActors[indexPath.item]
-//        actorCell.configureCell(actorModel: arrayOfActors)
-//
+    //        guard let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath) as? SubclassedCollectionViewCell else {
+    //            return UICollectionViewCell()
+    //        }
+    //
+    //        //let video = arrayOfVideoURL[indexPath.item]
+    //        let still = arrayOfItems[indexPath.item]
+    //        videoCell.configureCell(still: still)
+    //
+    //        //return videoCell
+    //
+    //        guard let actorCell = collectionView.dequeueReusableCell(withReuseIdentifier: "actorCell", for: indexPath) as? ActorsCollectionViewCell else {
+    //            return UICollectionViewCell()
+    //        }
+    //        let arrayOfActors = arrayOfActors[indexPath.item]
+    //        actorCell.configureCell(actorModel: arrayOfActors)
+    //
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let videoData = arrayOfVideoURL[indexPath.item]
-    videoUrl(url: videoData)
+        let videoData = arrayOfVideoURL[indexPath.item]
+        videoUrl(url: videoData)
+    }
 }
 
-    }
-    
     

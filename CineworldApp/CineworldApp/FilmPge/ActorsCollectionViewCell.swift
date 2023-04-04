@@ -20,7 +20,7 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(actorModel: Items) {
+    func configureCell(actorModel: ActorModel) {
         self.name.text = actorModel.nameRu
         guard let urlString = actorModel.posterUrl,
               let url = URL(string: urlString) else { return }
@@ -46,7 +46,7 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(name)
         name.translatesAutoresizingMaskIntoConstraints = false
 
-        name.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        name.heightAnchor.constraint(equalToConstant: 36).isActive = true
         name.topAnchor.constraint(equalTo: self.photo.bottomAnchor, constant: 8).isActive = true
         //nameOfFilm.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
         name.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true

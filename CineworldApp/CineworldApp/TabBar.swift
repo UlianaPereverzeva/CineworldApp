@@ -22,7 +22,7 @@ class TabBar: UITabBarController {
         viewControllers = [
             createNavController(for: MainPageViewController(), title: NSLocalizedString("Главное", comment: ""), image: UIImage(systemName: "house")!),
             createNavController(for: SearchPageViewController(), title: NSLocalizedString("Поиск", comment: ""), image: UIImage(systemName: "magnifyingglass")!),
-            createNavController(for: MyFilmsViewController(), title: NSLocalizedString("Мои фильмы", comment: ""), image: UIImage(systemName: "bookmark")!),
+            createNavController(for: FavoritesFilmsViewController(), title: NSLocalizedString("Мои фильмы", comment: ""), image: UIImage(systemName: "bookmark")!),
             createNavController(for: MyAccountViewController(), title: NSLocalizedString("Профиль", comment: ""), image: UIImage(systemName: "person")!)
         ]
     }

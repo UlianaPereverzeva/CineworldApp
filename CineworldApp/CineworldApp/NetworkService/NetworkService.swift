@@ -124,7 +124,7 @@ class NetworkService {
             }
         }
     
-    static func fetchPosterByIdOfGenres(genresID: Int, callBack: @escaping (Premiers?, Error?) -> Void) {
+    static func fetchPosterByIdOfGenres(genresID: Int, callBack: @escaping (Films?, Error?) -> Void) {
     
         let url = "\(ApiConstans.filmByFiltersPath)?genres=\(genresID)&order=RATING&type=FILM&ratingFrom=7&ratingTo=10"
     
@@ -133,14 +133,14 @@ class NetworkService {
     
             AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: HTTPHeaders(headers)).response { response in
     
-                var jsonValue: Premiers?
+                var jsonValue: Films?
                 var err: Error?
     
                 switch response.result {
                 case.success(let data):
                     guard let data = data else { return }
                     do {
-                        jsonValue = try JSONDecoder().decode(Premiers.self, from: data)
+                        jsonValue = try JSONDecoder().decode(Films.self, from: data)
                     } catch {
                         err = error
                     }
@@ -205,7 +205,7 @@ class NetworkService {
         }
     }
     
-    static func fetchActors(filmID: Int, callBack: @escaping (Premiers?, Error?) -> Void) {
+    static func fetchActors(filmID: Int, callBack: @escaping ([ActorModel]?, Error?) -> Void) {
         
         let url = "\(ApiConstans.actorPath)\(filmID)"
         
@@ -214,14 +214,14 @@ class NetworkService {
         
         AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: HTTPHeaders(headers)).response { response in
 
-            var jsonValue: Premiers?
+            var jsonValue: [ActorModel]?
             var err: Error?
 
             switch response.result {
             case.success(let data):
                 guard let data = data else { return }
                 do {
-                    jsonValue = try JSONDecoder().decode(Premiers.self, from: data)
+                    jsonValue = try JSONDecoder().decode([ActorModel].self, from: data)
                 } catch {
                     err = error
                 }
@@ -230,5 +230,33 @@ class NetworkService {
             }
             callBack(jsonValue, err)
         }
+    }
+    
+    static func fetchFilmsBySearch(keyword: String, callBack: @escaping ([ActorModel]?, Error?) -> Void) {
+        
+        let url = "\(ApiConstans.searchPath)\(keyword)"
+        
+        let headers = ["X-API-KEY": "f926902b-4c3d-458f-92c5-206a685893aa",
+                       "Content-Type": "application/json"]
+        
+        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: HTTPHeaders(headers)).response { response in
+
+            var jsonValue: [ActorModel]?
+            var err: Error?
+
+            switch response.result {
+            case.success(let data):
+                guard let data = data else { return }
+                do {
+                    jsonValue = try JSONDecoder().decode([ActorModel].self, from: data)
+                } catch {
+                    err = error
+                }
+            case.failure(let error):
+                err = error
+            }
+            callBack(jsonValue, err)
+        }
+
     }
 }

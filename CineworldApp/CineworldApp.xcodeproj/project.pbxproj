@@ -22,7 +22,7 @@
 		85670C6F29916B76003DA754 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C6E29916B76003DA754 /* MainPageViewController.swift */; };
 		85670C7129916ECF003DA754 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7029916ECF003DA754 /* TabBar.swift */; };
 		85670C7429918774003DA754 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7329918774003DA754 /* MyAccountViewController.swift */; };
-		85670C7729918819003DA754 /* MyFilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7629918819003DA754 /* MyFilmsViewController.swift */; };
+		85670C7729918819003DA754 /* FavoritesFilmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670C7629918819003DA754 /* FavoritesFilmsViewController.swift */; };
 		85670CC1299E4B86003DA754 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670CC0299E4B86003DA754 /* SignUpViewController.swift */; };
 		85670CC4299F8CBA003DA754 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 85670CC3299F8CBA003DA754 /* IQKeyboardManagerSwift */; };
 		85670CC8299FA612003DA754 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670CC7299FA612003DA754 /* UserModel.swift */; };
@@ -38,10 +38,16 @@
 		85844BE129D4DCED007B2C31 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE029D4DCED007B2C31 /* CollectionViewCell.swift */; };
 		85844BE429D76768007B2C31 /* FilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE329D76768007B2C31 /* FilmViewController.swift */; };
 		85844BE729D778A9007B2C31 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE629D778A9007B2C31 /* PlayerView.swift */; };
-		85844BEA29D778FC007B2C31 /* SubclassedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE929D778FC007B2C31 /* SubclassedCollectionViewCell.swift */; };
+		85844BEA29D778FC007B2C31 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE929D778FC007B2C31 /* VideoCollectionViewCell.swift */; };
 		85844BEC29D8709C007B2C31 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BEB29D8709C007B2C31 /* VideoModel.swift */; };
 		85844BEE29D9FF0F007B2C31 /* ActorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BED29D9FF0F007B2C31 /* ActorModel.swift */; };
 		85844BF029DA012C007B2C31 /* ActorsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BEF29DA012C007B2C31 /* ActorsCollectionViewCell.swift */; };
+		85844BF229DB6ECA007B2C31 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BF129DB6ECA007B2C31 /* SearchTableViewCell.swift */; };
+		85844BF529DC61C8007B2C31 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 85844BF429DC61C8007B2C31 /* Realm */; };
+		85844BF729DC61C8007B2C31 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 85844BF629DC61C8007B2C31 /* RealmSwift */; };
+		85844BF929DC6662007B2C31 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BF829DC6662007B2C31 /* FavoritesTableViewCell.swift */; };
+		85844BFB29DC8FDF007B2C31 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BFA29DC8FDF007B2C31 /* RealmService.swift */; };
+		85844BFE29DC9098007B2C31 /* Favoriteslist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BFD29DC9098007B2C31 /* Favoriteslist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +59,7 @@
 		85670C6E29916B76003DA754 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		85670C7029916ECF003DA754 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		85670C7329918774003DA754 /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
-		85670C7629918819003DA754 /* MyFilmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFilmsViewController.swift; sourceTree = "<group>"; };
+		85670C7629918819003DA754 /* FavoritesFilmsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesFilmsViewController.swift; sourceTree = "<group>"; };
 		85670CC0299E4B86003DA754 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		85670CC7299FA612003DA754 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		85670CC929A0FDA7003DA754 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -70,10 +76,14 @@
 		85844BE029D4DCED007B2C31 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		85844BE329D76768007B2C31 /* FilmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmViewController.swift; sourceTree = "<group>"; };
 		85844BE629D778A9007B2C31 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		85844BE929D778FC007B2C31 /* SubclassedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubclassedCollectionViewCell.swift; sourceTree = "<group>"; };
+		85844BE929D778FC007B2C31 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		85844BEB29D8709C007B2C31 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		85844BED29D9FF0F007B2C31 /* ActorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorModel.swift; sourceTree = "<group>"; };
 		85844BEF29DA012C007B2C31 /* ActorsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorsCollectionViewCell.swift; sourceTree = "<group>"; };
+		85844BF129DB6ECA007B2C31 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		85844BF829DC6662007B2C31 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		85844BFA29DC8FDF007B2C31 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		85844BFD29DC9098007B2C31 /* Favoriteslist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favoriteslist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +97,9 @@
 				85459D1829D1F2150017EB69 /* Alamofire in Frameworks */,
 				85459D1E29D30F360017EB69 /* Kingfisher in Frameworks */,
 				85459D1029CB45E10017EB69 /* FirebaseStorage in Frameworks */,
+				85844BF529DC61C8007B2C31 /* Realm in Frameworks */,
 				85670CC4299F8CBA003DA754 /* IQKeyboardManagerSwift in Frameworks */,
+				85844BF729DC61C8007B2C31 /* RealmSwift in Frameworks */,
 				85459D1B29D202BC0017EB69 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				85670C6C299160AD003DA754 /* SearchPageViewController.swift */,
+				85844BF129DB6ECA007B2C31 /* SearchTableViewCell.swift */,
 			);
 			path = SearchPage;
 			sourceTree = "<group>";
@@ -136,12 +149,13 @@
 			path = MyAcountPage;
 			sourceTree = "<group>";
 		};
-		85670C75299187D9003DA754 /* SaveFilmsPage */ = {
+		85670C75299187D9003DA754 /* FavoritesFilmsPage */ = {
 			isa = PBXGroup;
 			children = (
-				85670C7629918819003DA754 /* MyFilmsViewController.swift */,
+				85670C7629918819003DA754 /* FavoritesFilmsViewController.swift */,
+				85844BF829DC6662007B2C31 /* FavoritesTableViewCell.swift */,
 			);
-			path = SaveFilmsPage;
+			path = FavoritesFilmsPage;
 			sourceTree = "<group>";
 		};
 		85670CC5299FA5A7003DA754 /* Models */ = {
@@ -186,6 +200,7 @@
 		85713855299022A10022F44C /* CineworldApp */ = {
 			isa = PBXGroup;
 			children = (
+				85844BFC29DC903D007B2C31 /* Realm */,
 				85844BE529D77881007B2C31 /* VideoPlayer */,
 				85844BE229D7672F007B2C31 /* FilmPge */,
 				85459D1F29D31C590017EB69 /* ApiConstans */,
@@ -193,7 +208,7 @@
 				85670C7029916ECF003DA754 /* TabBar.swift */,
 				85670CC6299FA5B9003DA754 /* SignUp */,
 				85670CC5299FA5A7003DA754 /* Models */,
-				85670C75299187D9003DA754 /* SaveFilmsPage */,
+				85670C75299187D9003DA754 /* FavoritesFilmsPage */,
 				85670C7229918716003DA754 /* MyAcountPage */,
 				85670C6B29916088003DA754 /* SearchPage */,
 				85670C682991414C003DA754 /* MainPage */,
@@ -228,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				85844BE329D76768007B2C31 /* FilmViewController.swift */,
+				85844BE929D778FC007B2C31 /* VideoCollectionViewCell.swift */,
 				85844BEF29DA012C007B2C31 /* ActorsCollectionViewCell.swift */,
 			);
 			path = FilmPge;
@@ -237,9 +253,17 @@
 			isa = PBXGroup;
 			children = (
 				85844BE629D778A9007B2C31 /* PlayerView.swift */,
-				85844BE929D778FC007B2C31 /* SubclassedCollectionViewCell.swift */,
 			);
 			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		85844BFC29DC903D007B2C31 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				85844BFA29DC8FDF007B2C31 /* RealmService.swift */,
+				85844BFD29DC9098007B2C31 /* Favoriteslist.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +291,8 @@
 				85459D1729D1F2150017EB69 /* Alamofire */,
 				85459D1A29D202BC0017EB69 /* AlamofireImage */,
 				85459D1D29D30F360017EB69 /* Kingfisher */,
+				85844BF429DC61C8007B2C31 /* Realm */,
+				85844BF629DC61C8007B2C31 /* RealmSwift */,
 			);
 			productName = CineworldApp;
 			productReference = 85713853299022A10022F44C /* CineworldApp.app */;
@@ -302,6 +328,7 @@
 				85459D1629D1F2150017EB69 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				85459D1929D202BC0017EB69 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				85459D1C29D30F360017EB69 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				85844BF329DC61C7007B2C31 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 85713854299022A10022F44C /* Products */;
 			projectDirPath = "";
@@ -330,25 +357,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85844BEA29D778FC007B2C31 /* SubclassedCollectionViewCell.swift in Sources */,
+				85844BEA29D778FC007B2C31 /* VideoCollectionViewCell.swift in Sources */,
 				85670CCA29A0FDA7003DA754 /* SignInViewController.swift in Sources */,
 				85670C6D299160AD003DA754 /* SearchPageViewController.swift in Sources */,
 				85844BE129D4DCED007B2C31 /* CollectionViewCell.swift in Sources */,
 				85844BE729D778A9007B2C31 /* PlayerView.swift in Sources */,
+				85844BFE29DC9098007B2C31 /* Favoriteslist.swift in Sources */,
 				85713857299022A10022F44C /* AppDelegate.swift in Sources */,
+				85844BF929DC6662007B2C31 /* FavoritesTableViewCell.swift in Sources */,
 				85459D1529CB96360017EB69 /* FilmModel.swift in Sources */,
 				85713859299022A10022F44C /* SceneDelegate.swift in Sources */,
 				85844BDB29D3975D007B2C31 /* PremiereModel.swift in Sources */,
 				85670C7429918774003DA754 /* MyAccountViewController.swift in Sources */,
 				85670C7129916ECF003DA754 /* TabBar.swift in Sources */,
 				85844BEE29D9FF0F007B2C31 /* ActorModel.swift in Sources */,
+				85844BFB29DC8FDF007B2C31 /* RealmService.swift in Sources */,
 				85844BF029DA012C007B2C31 /* ActorsCollectionViewCell.swift in Sources */,
 				85844BDF29D4D3EA007B2C31 /* FilmFilterModel.swift in Sources */,
 				85670C6F29916B76003DA754 /* MainPageViewController.swift in Sources */,
 				85670CC1299E4B86003DA754 /* SignUpViewController.swift in Sources */,
 				85844BE429D76768007B2C31 /* FilmViewController.swift in Sources */,
 				85844BDD29D48A0D007B2C31 /* PosterModel.swift in Sources */,
-				85670C7729918819003DA754 /* MyFilmsViewController.swift in Sources */,
+				85670C7729918819003DA754 /* FavoritesFilmsViewController.swift in Sources */,
+				85844BF229DB6ECA007B2C31 /* SearchTableViewCell.swift in Sources */,
 				85670CC8299FA612003DA754 /* UserModel.swift in Sources */,
 				85459D1329CB8DED0017EB69 /* NetworkService.swift in Sources */,
 				8571386D299031370022F44C /* FirstAnimationScreenViewController.swift in Sources */,
@@ -609,6 +640,14 @@
 				version = 6.5.0;
 			};
 		};
+		85844BF329DC61C7007B2C31 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.38.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -651,6 +690,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 85670CC2299F8CBA003DA754 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		85844BF429DC61C8007B2C31 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85844BF329DC61C7007B2C31 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		85844BF629DC61C8007B2C31 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85844BF329DC61C7007B2C31 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

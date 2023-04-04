@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 
 
-class SubclassedCollectionViewCell: UICollectionViewCell {
+class VideoCollectionViewCell: UICollectionViewCell {
     
     var videoUrl = UILabel()
     var image = UIImageView()
