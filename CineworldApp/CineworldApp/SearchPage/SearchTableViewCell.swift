@@ -12,32 +12,15 @@ class SearchTableViewCell: UITableViewCell {
     private var film = UILabel()
     private var poster = UIImageView()
     
-     
-    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        if selected == true{
-//            self.contentView.backgroundColor = UIColor(red: 0.70, green: 0.82, blue: 0.70, alpha: 1.00)
-//            } else if selected == false {
-//                self.contentView.backgroundColor = UIColor(red: 0.78, green: 0.88, blue: 0.78, alpha: 1.00)
-//            }
-//    }
-    
-    func configure(film: String) {
+    func configure(film: Films) {
         setUpUi()
-        self.film.text = film
+        self.film.text = film.nameRu
+        guard let imageUrl = film.posterUrlPreview,
+              let url = URL(string: imageUrl) else { return }
+        self.poster.kf.setImage(with: url)
     }
     
-    
-    
     func setUpUi() {
-        
-        let background = UIImage(named: "example")
-        poster.image = background
         
         self.poster.translatesAutoresizingMaskIntoConstraints = false
         self.poster.contentMode = .scaleAspectFit
@@ -64,5 +47,4 @@ class SearchTableViewCell: UITableViewCell {
             self.film.heightAnchor.constraint(equalToConstant: 24),
         ])
     }
-
 }

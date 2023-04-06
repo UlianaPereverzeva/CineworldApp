@@ -23,12 +23,14 @@ class FavoritesFilmsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        setupTableView()
+
+        //realmService.localRealm.deleteAll()
         updateData()
 //        token = realmService.localRealm.observe({ [weak self] _, realm in
 //            self?.updateData()
 //        })
-        
-        setupTableView()
+
         tableView.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
         view.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
         
@@ -38,6 +40,8 @@ class FavoritesFilmsViewController: UIViewController {
         favoriteslist = realmService.localRealm.objects(Favoriteslist.self).map({ $0 })
         tableView.reloadData()
     }
+    
+    
     
     private func setUpUI() {
         favoritesLabel.text = "Избранное"
@@ -81,8 +85,7 @@ extension FavoritesFilmsViewController: UITableViewDataSource, UITableViewDelega
         }
         cell.contentView.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
         let favoriteslist = favoriteslist[indexPath.row]
-        //let name = arrayOfNames[indexPath.row]
-        //let poster = arrayOfPosters[indexPath.row]
+   
         //let id = filmID[indexPath.row]
         let data = favoriteslist.poster
         let poster = UIImage(data: data as Data)
@@ -94,5 +97,19 @@ extension FavoritesFilmsViewController: UITableViewDataSource, UITableViewDelega
         return 80
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            let favorites = favoriteslist[indexPath.row]
+            self.favoriteslist.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            try? realmService.localRealm.write {
+                 realmService.localRealm.delete(favorites)
+            }
+        }
+    }
 }

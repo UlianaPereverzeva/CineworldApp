@@ -37,7 +37,6 @@
 		85844BDF29D4D3EA007B2C31 /* FilmFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BDE29D4D3EA007B2C31 /* FilmFilterModel.swift */; };
 		85844BE129D4DCED007B2C31 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE029D4DCED007B2C31 /* CollectionViewCell.swift */; };
 		85844BE429D76768007B2C31 /* FilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE329D76768007B2C31 /* FilmViewController.swift */; };
-		85844BE729D778A9007B2C31 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE629D778A9007B2C31 /* PlayerView.swift */; };
 		85844BEA29D778FC007B2C31 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BE929D778FC007B2C31 /* VideoCollectionViewCell.swift */; };
 		85844BEC29D8709C007B2C31 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BEB29D8709C007B2C31 /* VideoModel.swift */; };
 		85844BEE29D9FF0F007B2C31 /* ActorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BED29D9FF0F007B2C31 /* ActorModel.swift */; };
@@ -48,6 +47,8 @@
 		85844BF929DC6662007B2C31 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BF829DC6662007B2C31 /* FavoritesTableViewCell.swift */; };
 		85844BFB29DC8FDF007B2C31 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BFA29DC8FDF007B2C31 /* RealmService.swift */; };
 		85844BFE29DC9098007B2C31 /* Favoriteslist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BFD29DC9098007B2C31 /* Favoriteslist.swift */; };
+		85844C0029DDC21F007B2C31 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844BFF29DDC21F007B2C31 /* RealmManager.swift */; };
+		85844C0229DE1737007B2C31 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844C0129DE1737007B2C31 /* SearchModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +76,6 @@
 		85844BDE29D4D3EA007B2C31 /* FilmFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmFilterModel.swift; sourceTree = "<group>"; };
 		85844BE029D4DCED007B2C31 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		85844BE329D76768007B2C31 /* FilmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmViewController.swift; sourceTree = "<group>"; };
-		85844BE629D778A9007B2C31 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		85844BE929D778FC007B2C31 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		85844BEB29D8709C007B2C31 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		85844BED29D9FF0F007B2C31 /* ActorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorModel.swift; sourceTree = "<group>"; };
@@ -84,6 +84,8 @@
 		85844BF829DC6662007B2C31 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		85844BFA29DC8FDF007B2C31 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		85844BFD29DC9098007B2C31 /* Favoriteslist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favoriteslist.swift; sourceTree = "<group>"; };
+		85844BFF29DDC21F007B2C31 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		85844C0129DE1737007B2C31 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				85844BDE29D4D3EA007B2C31 /* FilmFilterModel.swift */,
 				85844BEB29D8709C007B2C31 /* VideoModel.swift */,
 				85844BED29D9FF0F007B2C31 /* ActorModel.swift */,
+				85844C0129DE1737007B2C31 /* SearchModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -201,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				85844BFC29DC903D007B2C31 /* Realm */,
-				85844BE529D77881007B2C31 /* VideoPlayer */,
 				85844BE229D7672F007B2C31 /* FilmPge */,
 				85459D1F29D31C590017EB69 /* ApiConstans */,
 				85459D1129CB8DCC0017EB69 /* NetworkService */,
@@ -249,19 +251,12 @@
 			path = FilmPge;
 			sourceTree = "<group>";
 		};
-		85844BE529D77881007B2C31 /* VideoPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				85844BE629D778A9007B2C31 /* PlayerView.swift */,
-			);
-			path = VideoPlayer;
-			sourceTree = "<group>";
-		};
 		85844BFC29DC903D007B2C31 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
 				85844BFA29DC8FDF007B2C31 /* RealmService.swift */,
 				85844BFD29DC9098007B2C31 /* Favoriteslist.swift */,
+				85844BFF29DDC21F007B2C31 /* RealmManager.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -360,8 +355,8 @@
 				85844BEA29D778FC007B2C31 /* VideoCollectionViewCell.swift in Sources */,
 				85670CCA29A0FDA7003DA754 /* SignInViewController.swift in Sources */,
 				85670C6D299160AD003DA754 /* SearchPageViewController.swift in Sources */,
+				85844C0229DE1737007B2C31 /* SearchModel.swift in Sources */,
 				85844BE129D4DCED007B2C31 /* CollectionViewCell.swift in Sources */,
-				85844BE729D778A9007B2C31 /* PlayerView.swift in Sources */,
 				85844BFE29DC9098007B2C31 /* Favoriteslist.swift in Sources */,
 				85713857299022A10022F44C /* AppDelegate.swift in Sources */,
 				85844BF929DC6662007B2C31 /* FavoritesTableViewCell.swift in Sources */,
@@ -371,6 +366,7 @@
 				85670C7429918774003DA754 /* MyAccountViewController.swift in Sources */,
 				85670C7129916ECF003DA754 /* TabBar.swift in Sources */,
 				85844BEE29D9FF0F007B2C31 /* ActorModel.swift in Sources */,
+				85844C0029DDC21F007B2C31 /* RealmManager.swift in Sources */,
 				85844BFB29DC8FDF007B2C31 /* RealmService.swift in Sources */,
 				85844BF029DA012C007B2C31 /* ActorsCollectionViewCell.swift in Sources */,
 				85844BDF29D4D3EA007B2C31 /* FilmFilterModel.swift in Sources */,

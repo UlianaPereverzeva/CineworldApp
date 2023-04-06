@@ -56,6 +56,7 @@ struct FilmModel : Decodable {
         //        case shortFilm = "shortFilm"
         //        case completed = "completed"
     }
+    
     let kinopoiskId : Int?
 //    let imdbId : String?
     let nameRu : String?

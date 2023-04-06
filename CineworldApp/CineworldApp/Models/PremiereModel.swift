@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Films : Codable {
+struct Film : Codable {
     let total : Int?
     let items : [Items]?
     

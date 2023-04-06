@@ -10,12 +10,14 @@ import UIKit
 import RealmSwift
 
 class Favoriteslist: Object {
+    
     @objc dynamic var id : String = UUID().uuidString
 
     @objc dynamic var name = ""
     @objc dynamic var poster = NSData()
     //@objc dynamic var isfavorite = true
     override class func primaryKey() -> String? {
-        return "id"
+        return "name"
     }
 }
+

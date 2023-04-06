@@ -11,19 +11,32 @@ class SearchPageViewController: UIViewController {
 
     var tableView: UITableView!
     var searchBar: UISearchBar = UISearchBar()
+    var filmID = [658, 6379, 729, 740, 651, 652, 656, 659, 661, 664, 666, 688, 689, 447301]
 
-    var filterdata: [String]!
-    var carData = ["Audi", "BMW", "Mers"]
+    var arrayOfFilms = [Films]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        filterdata = carData
+        
         setUpSearchBar()
-
         setupTableView()
         view.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
         tableView.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
     }
+    
+//    func updateSearchResultsForSearchController(searchController: UISearchController) {
+//        guard let text = searchController.searchBar.text,
+//              let keyword = searchBar.text else { return }
+//        if text.count > 2 {
+//            NetworkService.fetchFilmsBySearch(keyword: keyword) { searchModel, error in
+//                guard let searchModel = searchModel?.films else { return }
+//                self.arrayOfFilms = searchModel
+//                self.tableView.reloadData()
+//
+//            }
+//        }
+//    }
+//
     private func setUpSearchBar() {
         if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
             textfield.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
@@ -67,8 +80,10 @@ class SearchPageViewController: UIViewController {
 }
 extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
     
+   
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        filterdata.count
+        arrayOfFilms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -76,48 +91,50 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         cell.contentView.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
-        let film = filterdata[indexPath.row]
-        cell.configure(film: film) //filterdata[indexPath.row]
+        let film = arrayOfFilms[indexPath.item]
+        
+        cell.configure(film: film)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = FilmViewController()
+        let film = arrayOfFilms[indexPath.item]
+        vc.filmID = film.filmId
+//        guard let urlString = film.posterUrl,
+//              let url = URL(string: urlString) else { return }
+//        vc.mainImageOfFilm.kf.setImage(with: url)
+        //vc.postId = post[indexPath.row].id
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension SearchPageViewController: UISearchBarDelegate {
- 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        filterdata = searchText.isEmpty ? carData : carData.filter { (item: String) -> Bool in
-//            // If dataItem matches the searchText, return true to include it
-//            return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-//        }
 //
-//        tableView.reloadData()
-        filterdata = []
-        if searchText == "" {
-            filterdata = carData
-        }
-        for word in carData {
-            if word.uppercased().contains(searchText.uppercased()) {
-                filterdata.append(word)
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//
+//                if !searchText.isEmpty {
+//                    return arrayOfFilms.filter { $0.contains(searchText) }
+//
+//                } else {
+//                }
+        guard let text = searchBar.text else { return }
+        if text.count > 2 {
+            NetworkService.fetchFilmsBySearch(keyword: text) { searchModel, error in
+                guard let searchModel = searchModel?.films else { return }
+                self.arrayOfFilms = searchModel
             }
+        } else {
+         arrayOfFilms.removeAll()
         }
         self.tableView.reloadData()
+
     }
 }
-//extension UISearchBar {
-//    func setTextFieldColor(_ color: UIColor) {
-//        for subView in self.subviews {
-//            for subSubView in subView.subviews {
-//                let view = subSubView as? UITextInputTraits
-//                if view != nil {
-//                    let textField = view as? UITextField
-//                    textField?.backgroundColor = color
-//                    break
-//                }
-//            }
-//        }
-//    }
-//}
+

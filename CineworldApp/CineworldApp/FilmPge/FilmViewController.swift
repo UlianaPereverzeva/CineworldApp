@@ -10,7 +10,9 @@ import UIKit
 import WebKit
 
 class FilmViewController: UIViewController {
-    
+    var favoriteslist : Favoriteslist?
+    var realmService = RealmService()
+
     var mainImageOfFilm = UIImageView()
     var blackGradient = UIImageView()
     var favorites: UIButton!
@@ -45,15 +47,20 @@ class FilmViewController: UIViewController {
         setupScrollView()
         setUpUI()
         setUpVideoCollectionView()
-       
+        getPosters()
+
+        getData()
         getVideos()
         setUpActorsCollectionView()
         getActors()
-        getPostersAndStill()
+        getStill()
 //        setUpVideoCollectionView()
 //        getVideos()
         
-        navigationItem.backBarButtonItem?.tintColor = .white
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.backBarButtonItem?.tintColor = UIColor(red: 0.76, green: 0.89, blue: 0.23, alpha: 1.00)
+        navigationController?.navigationBar.backgroundColor = .clear
+        //navigationItem.backBarButtonItem?.tintColor = .white
         view.backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1.00)
         // navigationController?.isNavigationBarHidden = true
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -268,15 +275,62 @@ class FilmViewController: UIViewController {
     }
     
     @objc func isFavoriteButtonTapped(_ sender:UIButton!) {
-        let vc = FavoritesFilmsViewController()
-        guard let filmID = filmID else { return }
-        vc.filmID.append(filmID)
+        
         guard let name = nameOfFilm.text else { return }
-        vc.arrayOfNames.append(name)
-        self.navigationController?.pushViewController(vc, animated: true)
+        guard let image = mainImageOfFilm.image else { return }
+        
+        let isFilmExist = RealmManager.shared.objectExist(id: name)
+       
+        
+        if favoriteslist == nil {
+            favoriteslist = Favoriteslist()
+        }
+        
+        if !isFilmExist {
+            
+            favoriteslist?.name = name
+            let data = NSData(data: image.jpegData(compressionQuality: 0.9)!)
+            favoriteslist?.poster = data
+            
+            guard let favoriteslist = favoriteslist else { return }
+            try? realmService.localRealm.write {
+                realmService.localRealm.add(favoriteslist, update: .all)
+            }
+        }
     }
     
-    private func getVideos() {
+    func getData() {
+        //let vc = FilmViewController()
+        guard let filmID = filmID else { return }
+
+        NetworkService.fetchLogoOfFilm(filmID: filmID) { filmModel, error in
+            guard let filmModel = filmModel,
+                  let description = filmModel.description,
+                  let name = filmModel.nameRu,
+                  let rating = filmModel.ratingKinopoisk,
+                  let year = filmModel.year,
+                  let genres = filmModel.genres[0].genre,
+                  let countries = filmModel.countries[0].country,
+                  let filmLength = filmModel.filmLength,
+                  let ratingAgeLimits = filmModel.ratingAgeLimits,
+                  let urlString = filmModel.logoUrl,
+            let url = URL(string: urlString) else { return }
+            self.logoOfFilm.kf.setImage(with: url)
+            self.filmDescription.text = description
+            self.parametrsAboutFilm.text = "\(year), \(genres), \(countries),\n\(filmLength) мин, \(ratingAgeLimits)+"
+            self.numberOfFilmRating.text = rating.description
+            let image: UIImage?
+            if RealmManager.shared.objectExist(id: name) {
+                image = UIImage(named: "fullHeart")
+            } else {
+                image = UIImage(named: "hert")
+            }
+            self.favorites.setImage(
+                image, for: .normal)
+        }
+    }
+    
+    func getVideos() {
         guard let filmID = filmID else { return }
         NetworkService.fetchVideo(filmID: filmID) { videoModel, error in
             guard let videoModel = videoModel,
@@ -288,7 +342,17 @@ class FilmViewController: UIViewController {
         }
     }
     
-    private func getPostersAndStill() {
+    private func getPosters() {
+        let poster = "POSTER"
+        guard let filmID = filmID else { return }
+        NetworkService.fetchPosters(type: poster, filmID: filmID) { poster, error in
+            guard let poster = poster?.items[0].imageUrl,
+            let url = URL(string: poster) else { return }
+            self.mainImageOfFilm.kf.setImage(with: url)
+        }
+    }
+    
+    func getStill() {
         let still = "STILL"
         guard let filmID = filmID else { return }
         
@@ -313,7 +377,7 @@ class FilmViewController: UIViewController {
         webView.load(URLRequest(url: url))
     }
     
-    private func getActors() {
+    func getActors() {
         guard let filmID = filmID else { return }
         NetworkService.fetchActors(filmID: filmID) { actorModel, error in
             guard let actorModel = actorModel else { return }
